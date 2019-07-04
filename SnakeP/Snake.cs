@@ -86,6 +86,10 @@ namespace SnakeP
         // Die aktuelle Richtung der Schlange
         public Richtung richtung { get; set; }
 
+        // Wird gesetzt, wenn beim nächsten Zeichnen der Schlange ein 
+        // Segment hinzugefügt werden soll
+        private bool SegmentHinzufuegen;
+
         // Kontruktor
         public Snake()
         {
@@ -97,6 +101,9 @@ namespace SnakeP
         public void Init()
         {
             int Zentrum = AnzahlSpielfeldKacheln / 2;
+
+            // Kein Segment hinzufügen
+            SegmentHinzufuegen = false;
 
             // Startricht ist nach rechts
             richtung = Richtung.Rechts;
@@ -117,6 +124,14 @@ namespace SnakeP
                 return SegmentList.Count;
             }
         }
+
+        // Setzt Merker, dass beim nächsten Zeichnen der Schlange 
+        // ein Segment hinzugefügt werden soll
+        public void Wachsen()
+        {
+            SegmentHinzufuegen = true;
+        }
+
 
         // Diese Funktion bewegt die Schlange in die gesetzte Richtung
         // Das Bewegen wird durch Hinzufügen eines neuen Kopfsegment und durch Löschen des Schwanzsegments erreicht
@@ -192,8 +207,15 @@ namespace SnakeP
             // Füge neues Kopfsegment zur Segmentliste hinzu
             SegmentList.Insert(0, new SnakeSegment(xNeu, yNeu));
 
-            // Lösche Schwanzsegment
-            SegmentList.RemoveAt(SegmentList.Count - 1);
+            // Lösche Schwanzsegment nur dann, wenn kein neues Segment hinzugefügt werden soll
+            if (SegmentHinzufuegen == false)
+            {
+                SegmentList.RemoveAt(SegmentList.Count - 1);
+            }
+            else
+            {
+                SegmentHinzufuegen = false;
+            }
         }
 
         // Zeichne Schlange

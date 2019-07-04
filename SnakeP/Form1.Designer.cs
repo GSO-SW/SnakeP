@@ -96,6 +96,7 @@
             this.buttonNeuesSpiel.TabIndex = 0;
             this.buttonNeuesSpiel.Text = "Neues Spiel";
             this.buttonNeuesSpiel.UseVisualStyleBackColor = true;
+            this.buttonNeuesSpiel.Click += new System.EventHandler(this.buttonNeuesSpiel_Click);
             // 
             // labelScore
             // 
@@ -135,6 +136,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainForm";
             this.Text = "SnakeP";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TasteGedrueckt);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
